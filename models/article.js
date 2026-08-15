@@ -6,6 +6,7 @@ author: { type: String, default: 'Guest' },
 slug: { type: String },
 category: { type: String, default: 'General'},
 published: { type: Boolean, default: false},
+userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Article', articleSchema);
