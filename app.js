@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config();
 const cookieParser = require('cookie-parser');
+const config = require('./config');
 
 const articleRoutes = require('./routes/articles');
 const authRoutes = require('./routes/auth');
@@ -13,9 +13,8 @@ app.use(cookieParser());
 app.use('/api/articles', articleRoutes);
 app.use('/auth', authRoutes);
 
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => console.log('connected to MongoDB Atlas'))
-.catch((err) => console.error('MongoDB connection error:', err));
+mongoose.connect(config.mongoUri)
+  .then(() => console.log('connected to MongoDB Atlas'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(config.port, () => console.log(`Server running on port ${config.port}`));
